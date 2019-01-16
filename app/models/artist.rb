@@ -32,8 +32,8 @@ class Artist
   end
 
   def self.total_experience
-    @@all.map{|obj| obj.years_experience}.inject {|sum, years|
-    sum + years
+    @@all.each.inject(0) {|sum, artist|
+      sum + artist.years_experience
   }
   end
 
@@ -42,7 +42,7 @@ class Artist
   end
 
   def self.most_prolific
-      @@all.max_by {|artist| artist.painting_count}
+      @@all.max_by {|artist| artist.painting_count / artist.years_experience}
   end
 
   def create_painting(title, price, gallery)
